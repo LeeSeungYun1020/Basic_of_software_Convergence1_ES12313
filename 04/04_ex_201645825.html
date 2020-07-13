@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<!-- 201645825 이승윤 20.07.13 4장 DOM 응용 문제-->
+<head>
+    <meta charset="UTF-8">
+    <title>4장 DOM 응용 문제</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        body {
+            padding: 0px;
+            margin: 0px;
+        }
+        header {
+            background-color: indianred;
+            color: white;
+            width: 100%;
+            height: 200px;
+            padding: 20px;
+            box-sizing: border-box; /*padding 고려*/
+        }
+        header > div {
+            float: left;
+        }
+        header h1, header p {
+            text-align: center;
+            color: white;
+            margin: 30px;
+        }
+        header img {
+            margin: 20px;
+        }
+        nav {
+            clear: both;
+            background-color: lavenderblush;
+            height: 40px;
+        }
+        nav > a {
+            text-decoration: none;
+            display: inline-block;
+            width: 100px;
+            height: 30px;
+            padding: 5px;
+            text-align: center;
+        }
+        nav > a:link, a:visited{
+            color: black;
+        }
+        nav > a:hover, a:active{
+            color: white;
+            background-color: indianred;
+        }
+        section p, section ul {
+            padding-left: 35px;
+        }
+        section a {
+            text-decoration: none;
+        }
+        h2 {
+            border-style: solid;
+            border-width: 2px 2px 2px 10px;
+            padding: 10px;
+        }
+        section {
+            width: 45%;
+            height: 250px;
+            padding: 10px;
+            margin: 10px;
+            box-sizing: border-box;
+            border: solid black 2px;
+            float: left;
+        }
+        .c1 {
+            border-color: lightcoral;
+        }
+        .c2 {
+            border-color: lightslategray;
+        }
+        p {
+            color: goldenrod;
+        }
+        footer {
+            clear: both;
+            background-color: indianred;
+            color: white;
+            padding: 20px;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <img src="./img/me.jpg" alt="본인사진" width="150px" height="150px">
+        </div>
+        <div>
+            <h1>Lee Seung Yun</h1>
+            <p>이승윤</p>
+        </div>
+        
+    </header>
+    <nav>
+        <a href="#s1">[개인정보]</a>&nbsp;&nbsp;
+        <a href="#s2">[학력사항]</a>&nbsp;&nbsp;
+        <a href="#s3">[자격사항]</a>&nbsp;&nbsp;
+        <a href="#s4">[자기소개]</a>&nbsp;&nbsp;
+    </nav>
+    <section id="s1">
+        <h2 class="c1">개인정보</h2>
+        <p>
+            <i class="material-icons">phone</i>   010-5399-3186<br>
+            <i class="material-icons">email</i>   ileilliat@gmail.com<br>
+            <i class="material-icons">assignment</i>   부산광역시 남구 홍곡로 360<br>
+        </p>
+    </section>
+    <section id="s2">
+        <h2 class="c2">학력사항</h2>
+        <ul>
+            <li>
+                <img src="./img/pnu.png" alt="부산대" height="14px">
+                <a href="http://www.pusan.ac.kr/kor/Main.do" target="_blank">부산대학교 재학</a>
+            </li>
+            <li>
+                <img src="./img/bjh.png" alt="부산중앙고" height="14px">
+                <a href="http://school.busanedu.net/bjungang-h/main.do" target="_blank">부산중앙고등학교 졸업</a>
+            </li>
+            <li>
+                <img src="./img/nms.png" alt="남천중" height="14px">
+                <a href="http://school.busanedu.net/namcheon-m/main.do" target="_blank">남천중학교 졸업</a>
+            </li>
+            <li>
+                <img src="./img/des.png" alt="대남초" height="14px">
+                <a href="http://school.busanedu.net/daenam-e/main.do" target="_blank">대남초등학교 졸업</a>
+                
+            </li>
+        </ul>
+    </section>
+    <section id="s3">
+        <h2 class="c1">자격사항</h2>
+        <ul>
+            <li>컴활</li>
+            <li>사진기능사</li>
+            <li>토익</li>
+        </ul>
+    </section>
+    <section id="s4">
+        <h2 class="c2">자기소개</h2>
+        <p>
+            <a href="./01_ex_201645825.html" target="_blank">SWOT 분석</a><br>
+            안녕하십니까? 웃는 얼굴이 매력적인 이승윤입니다.
+        </p>
+    </section>
+    <footer>
+        &copy; LEE SEUNG YUN <br>
+        부산광역시 남구 홍곡로 360
+    </footer>
+</body>
