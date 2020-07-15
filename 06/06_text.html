@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JavaScript 연습</title>
+        <style>
+            #msg{
+                border: 2px solid green;
+                width: 300px;
+                height: 100px;
+                padding: 10px;
+                margin: 10px;
+            }
+        </style>
+    </head>
+    <script>
+        function show(name) {
+            //alert("안녕하세요.")
+            //document.write("hi")
+            //console.log("hello")
+            //document.getElementsByTagName("h1")[0].innerHTML = "Hi!!!"
+            //document.getElementById("p2").innerHTML = "P2"
+            alert(name + " 어서오세요!")
+            document.getElementById("msg").innerHTML = form1.txt1.value
+        }
+    </script>
+    <body>
+        <h1>자바스크립트 연습</h1>
+        <p id="p1">첫번째 영역</p>
+        <p id="p2">두번째 영역</p>
+        <form name="form1">
+            <input type="text" name="txt1" id="txt1" placeholder="값 입력">
+            <input type="button" value="확인" onclick="show('홍길동');">
+            <input type="reset" value="취소">
+        </form>
+
+        <div id="msg">
+
+        </div>
+    </body>
+</html>
