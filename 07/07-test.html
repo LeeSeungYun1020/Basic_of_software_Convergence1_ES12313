@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!-- 201645825 이승윤 20/07/16 -->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>7장 자바스크립트2 연습</title>
+        <script>
+            function calc(){
+                let num1 = parseInt(plus.num1.value);
+                let num2 = parseInt(plus.num2.value);
+                plus.num3.value = num1 + num2;
+            }
+            function hi(num){
+                // if(num == 1){
+                //     document.getElementById("p1").innerHTML = "<h2>안녕하세요<h2>";
+                //     document.getElementById("p2").innerHTML = "두번째 영역";
+                // }
+                // else if(num == 2){
+                //     document.getElementById("p2").innerHTML = "<h2>안녕하세요<h2>";
+                //     document.getElementById("p1").innerHTML = "첫번째 영역";
+                // }
+                switch(num){
+                    case 1:
+                        document.getElementById("p1").innerHTML = "<h2>안녕하세요<h2>";
+                        document.getElementById("p2").innerHTML = "두번째 영역";
+                        break;
+                    case 2:
+                        document.getElementById("p2").innerHTML = "<h2>안녕하세요<h2>";
+                        document.getElementById("p1").innerHTML = "첫번째 영역";
+                        break;
+                }
+            }
+
+            function oddEven() {
+                if (evenChecker.evenNumber.value % 2 == 0)
+                    alert("짝수입니다.");
+                else
+                    alert("홀수입니다.");
+            }
+
+            function arithmetic() {
+                let num1 = parseInt(calculator.number1.value);
+                let num2 = parseInt(calculator.number2.value);
+                let answer = 0;
+                switch(calculator.operator.value){
+                    case "add":
+                        answer = num1 + num2;
+                        break;
+                    case "sub":
+                        answer = num1 - num2;
+                        break;
+                    case "mul":
+                        answer = num1 * num2;
+                        break;
+                    case "div":
+                        answer = num1 / num2;
+                        break;
+                }
+                calculator.result.value = answer;
+            }
+        </script>
+        <style>
+            #calcBox{
+                border: 5px solid yellowgreen;
+                height: 40px;
+                padding: 10px;
+                margin: 5px;
+                text-align: center;
+                display: inline-block;
+            }
+            input[type="number"]{
+                width: 60px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>자바스크립트2</h1>
+        <form name="plus">
+            <input type="number" name="num1" id="num1" size="6" placeholder="숫자1">
+            +
+            <input type="number" name="num2" id="num2" size="6" placeholder="숫자2">
+            <input type="button" value="=" onclick="calc();">
+            <input type="number" name="num3" id="num3" size="6">
+        </form>
+        <br>
+        <hr>
+        <p id="p1">첫번째 영역</p>
+        <p id="p2">두번째 영역</p>
+        <form name="hello">
+            <input type="button" value="첫번째 영역" onclick="hi(1);">
+            <input type="button" value="두번째 영역" onclick="hi(2);">
+        </form>
+        <br>
+        <hr>
+        <form name="evenChecker">
+            <input type="number" name="evenNumber" id="evenNumber" size="7">
+            <input type="button" value="홀수/짝수?" onclick="oddEven()">
+        </form>
+        <br>
+        <hr>
+        <h1>계산기</h1>
+        <div id="calcBox">
+            <form name="calculator">
+                <input type="number" name="number1" id="number1" size="6" placeholder="숫자1">
+                <select name="operator" id="operator">
+                    <option value="add">+</option>
+                    <option value="sub">-</option>
+                    <option value="mul">*</option>
+                    <option value="div">/</option>
+                </select>
+                <input type="number" name="number2" id="number2" size="6" placeholder="숫자2">
+                <input type="button" value="=" onclick="arithmetic()">
+                <input type="number" name="result" id="result" size="6">
+                <input type="reset" value="다시 계산">
+            </form>
+        </div>
+        
+    </body>
+</html>

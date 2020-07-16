@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!-- 201645825 이승윤 20/07/16 7장 자바스크립트-연산자와 조건문 해결 문제 -->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>7장 자바스크립트 해결 문제</title>
+        <style>
+            .box1, .box2, .box3 {
+                border: 2px solid green;
+                padding: 10px;
+                margin: 10px;
+                width: 450px;
+                text-align: center;
+                box-sizing: border-box;
+            }
+            .box1 {
+                border-radius: 10px;
+                background-color: green;
+                height: 50px;
+                color: white;
+            }
+            .box3 {
+                border-radius: 10px;
+                height: 60px;
+            }
+            input[type=button], input[type=reset] {
+                width: 40px;
+                height: 30px;
+            }
+            input[type=number] {
+                width: 80px;
+            }
+            .p1 {
+                float: left;
+                width: 20%;
+            }
+            .p2 {
+                float: left;
+                width: 15%;
+            }
+            .p3 {
+                clear: both;
+                text-align: left;
+                background-color: greenyellow;
+                color: red;
+                padding-left: 25px;
+            }
+            #msg{
+                font-size: 25px;
+                color: red;
+            }
+        </style>
+        <script>
+            function calcShow() {
+                // 연산자
+                var op = myform.r_op.value;
+
+                // 안내 메시지 출력
+                if (myform.number1.value == ""){
+                    alert("첫번째 숫자를 입력해주세요!");
+                    myform.number1.focus();
+                    return;
+                }
+                if (myform.number2.value == ""){
+                    alert("두번째 숫자를 입력해주세요!");
+                    myform.number2.focus();
+                    return;
+                }
+                if (op == ""){
+                    alert("연산자를 입력해주세요!");
+                    return;
+                }
+
+                // 숫자
+                var num1 = parseInt(myform.number1.value);
+                var num2 = parseInt(myform.number2.value);
+                var result = 0;
+                var str = "";
+
+                // 계산하기
+                if(op == "+")
+                    result = num1 + num2;
+                else if(op == "-")
+                    result = num1 - num2;
+                else if(op == "*")
+                    result = num1 * num2;
+                else
+                    result = num1 / num2;
+
+                if (myform.ch_eval.checked == true){
+                    str = num1 + op + num2 + " = " + result;
+                } else {
+                    str = result;
+                }
+                // 결과 출력
+                document.getElementById("msg").innerHTML = str;
+            }
+
+            function clearShow() {
+                myform.reset();
+                document.getElementById("msg").innerHTML = "";
+            }
+        </script>
+    </head>
+    <body>
+        <div class="box1">
+            간단한 계산기
+        </div>
+        <div class="box2">
+            <form name="myform">
+                <p class="p1">
+                    <input type="number" name="number1" id="number1" size="6" placeholder="숫자1">
+                </p>
+                <p class="p1">
+                    <input type="radio" name="r_op" id="r_op1" value="+">
+                    <label for="r_op1"> + </label><br>
+                    <input type="radio" name="r_op" id="r_op2" value="-">
+                    <label for="r_op2"> - </label><br>
+                    <input type="radio" name="r_op" id="r_op3" value="*">
+                    <label for="r_op3"> * </label><br>
+                    <input type="radio" name="r_op" id="r_op4" value="/">
+                    <label for="r_op4"> / </label><br>
+                </p>
+                <p class="p1">
+                    <input type="number" name="number2" id="number2" size="6" placeholder="숫자2">
+                </p>
+                <p class="p2">
+                    <input type="button" value="=" onclick="calcShow();">
+                </p>
+                <p class="p2">
+                    <input type="button" value="취소" onclick="clearShow()">
+                </p>
+                <p class="p3">
+                    <input type="checkbox" name="ch_eval" id="ch_eval">
+                    <label for="ch_eval">수식 포함</label>
+                </p>
+            </form>
+        </div>
+        <div class="box3">
+            <div id="msg"></div>
+        </div>
+    </body>
+</html>
