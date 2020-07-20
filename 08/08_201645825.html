@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!-- 201645825 이승윤 20/07/20 8장 자바스크립트-반복문 해결 문제 -->
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>8장 자바스크립트-반복문 해결 문제</title>
+    <style>
+        .box1, .box2, #msg {
+            padding: 10px;
+            margin: 10px;
+            width: 420px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .box1 {
+            border-radius: 10px;
+            border: 2px solid green;
+            background-color: green;
+            height: 50px;
+            color: white;
+        }
+        #msg{
+            height: 240px;
+            border: 1px solid green;
+            font-size: 18px;
+            color: red;
+        }
+        .rdan{
+            font-size: 24px;
+            margin-top: 80px;
+        }
+        img{
+            width: 60px;
+            margin-top: 60px;
+        }
+    </style>
+    <script>
+        function showDan() {
+            if (myform.dan.value == ""){
+                alert("단을 선택하십시오.");
+                myform.dan.focus();
+                return;
+            } else {
+                var dan = parseInt(myform.dan.value);
+                var str = "";
+                for(var i = 1; i <= 9; i++){
+                    str += dan + " * " + i + " = " + (dan * i) + "<br>";
+                }
+                document.getElementById("msg").innerHTML = str;
+            }
+        }
+
+        function showClear() {
+            myform.reset();
+            document.getElementById("msg").innerHTML = "";
+        }
+
+        // function showRandom() {
+        //     var dan = Math.floor(Math.random() * 8) + 2;
+        //     var i = Math.floor(Math.random() * 9) + 1;
+        //     var str = "<div class='rdan'>" + dan + " * " + i + " = " + (dan * i) + "</div>";
+        //     document.getElementById("msg").innerHTML = str;
+        // }
+
+        function showRandom() {
+            var dan = Math.floor(Math.random() * 8) + 2;
+            var i = Math.floor(Math.random() * 9) + 1;
+            var result = dan * i;
+            var result10 = Math.floor(result/10);
+            var result1 = result % 10;
+            var str = "";
+            str += "<img src='./img/" + dan + ".png'>";
+            str += "<img src='./img/x.png'>";
+            str += "<img src='./img/" + i + ".png'>";
+            str += "<img src='./img/equal.png'>";
+            if (result10 == 0){
+                str += "<img src='./img/blank.png'>";
+            } else {
+                str += "<img src='./img/" + result10 + ".png'>";
+            }
+            str += "<img src='./img/" + result1 + ".png'>";
+            document.getElementById("msg").innerHTML = str;
+        }
+    </script>
+</head>
+<body>
+    <form name="myform">
+        <div class="box1">
+            구구단 학습하기
+        </div>
+        <div class="box2">
+            <select name="dan">
+                <option value="">단 선택</option>
+                <option value="2">2단</option>
+                <option value="3">3단</option>
+                <option value="4">4단</option>
+                <option value="5">5단</option>
+                <option value="6">6단</option>
+                <option value="7">7단</option>
+                <option value="8">8단</option>
+                <option value="9">9단</option>
+            </select>
+            <input type="button" value="단 보기" onclick="showDan();">
+            <input type="button" value="랜덤 보기" onclick="showRandom();">
+            <input type="button" value="지우기" onclick="showClear();">
+        </div>
+        <div id="msg"></div>
+    </form>
+</body>
+</html>
