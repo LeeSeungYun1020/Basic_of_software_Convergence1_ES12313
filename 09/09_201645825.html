@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!-- 201645825 이승윤 20/07/21 9장 jQuery 해결 문제 -->
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>9장 jQuery 해결 문제</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .box1, .box2, form{
+            width: 400px;
+            padding: 10px;
+            margin: 10px;
+            border: 2px solid;
+            text-align: center;
+        }
+        .box1{
+            border-radius: 10px;
+            border-color: green;
+            background-color: green;
+            height: 25px;
+            color: white;
+        }
+        .box2{
+            height: 130px;
+            padding-top: 20px;
+            border-color: grey;
+        }
+        img {
+            width: 200px;
+            height: 50px;
+        }
+        form{
+            border: none;
+            height: 20px;
+            clear: both;
+        }
+    </style>
+    <script>
+        $(document).ready(() => {
+            $("#sel1").change(() => {
+                var site = $("#sel1").val();
+                if (site == ""){
+                    $("#img1").hide();
+                    $("#p1").hide();
+                } else {
+                    $("#img1").show();
+                    $("#p1").show();
+                    $("#img1").attr("src", `./img/${site}.png`);
+                    var url = "";
+                    switch(site){
+                        case "google":
+                            url = "https://www.google.com";
+                            break;
+                        case "naver":
+                            url = "https://www.naver.com";
+                            break;
+                        case "daum":
+                            url = "https://www.daum.net";
+                            break;
+                        default:
+                            url = "";
+                    }
+                    $("#a1").attr("href", url);
+                    $("#p1").html(`<a href="${url}">${url}</a>`);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="box1">jQuery</div>
+    <div class="box2" id="d1">
+        <a id="a1"><img id="img1"></a>
+        <p id="p1"></p>
+    </div>
+    <form name="form1">
+        <select name="sel1" id="sel1">
+            <option value="">검색 엔진</option>
+            <option value="google">구글</option>
+            <option value="naver">네이버</option>
+            <option value="daum">다음</option>
+        </select>
+    </form>
+</body>
+</html>
