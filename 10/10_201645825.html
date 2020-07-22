@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<!-- 201645825 이승윤 20.07.22 // 10장 자바스크립트 문자열을 이용한 jQuery응용 해결문제 -->
+<html>
+
+<head>
+	<title>10장 자바스크립트 문자열을 이용한 jQuery응용 해결문제</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<style>
+		.box1 {
+			border-radius: 10px;
+			border: 2px solid #73AD21;
+			background-color: #73AD21;
+			padding: 10px;
+			margin: 10px;
+			width: 400px;
+			height: 20px;
+			color: white;
+			text-align: center;
+		}
+
+		.box2 {
+			padding: 10px;
+			margin: 10px;
+			width: 400px;
+			text-align: center;
+		}
+
+		#msg {
+			width: 400px;
+			height: 40px;
+			margin: 10px;
+			padding: 10px;
+			border: 1px solid #73AD21;
+			font-size: 14px;
+			color: red;
+			text-align: center;
+		}
+
+		#msgimg {
+			width: 400px;
+			margin: 10px;
+			padding: 10px;
+			border: 1px solid #73AD21;
+			text-align: center;
+		}
+
+		.b1 {
+			width: 100px;
+			height: 100px;
+			font-size: 30px;
+			text-align: center;
+		}
+	</style>
+	<script>
+		// 전역 변수
+		var total = 0; // 전체 시도 횟수
+		var winCount = 0; // 정답 횟수
+		$(document).ready(function() {
+			$("p>img").click(function() {
+				var nsrc = $(this).attr("src");
+				nsrc = nsrc.replace("./img/", "");
+				// 사용자 주사위
+				var n = parseInt(nsrc.charAt(0));
+				// 컴퓨터 주사위
+				var num = Math.floor(Math.random() * 6) + 1;
+				total++;
+
+				$("#img1").attr("src", `./img/${n}.png`);
+				$("#img2").attr("src", `./img/c${num}.png`);
+				// 결과
+				var str = "";
+				if (n == num){
+					winCount++;
+					str += "맞추었습니다.<br>";
+				} else {
+					str += "틀리었습니다.<br>";
+				}
+				str += `전체 횟수: ${total},  맞춘 횟수: ${winCount}`;
+				$("#msg").html(str);
+			})
+
+			$("input[type=button]").click(() => {
+				$("#msg").text("");
+				$("#img1").attr("src", `./img/q.png`);
+				$("#img2").attr("src", `./img/q.png`);
+				total = 0;
+				winCount = 0;
+			})
+		});
+	</script>
+</head>
+
+<body>
+	<form name="myform">
+		<div class="box1">
+			주사위게임
+		</div>
+		<div class="box2">
+			<p>
+				<img src="./img/1.png">
+				<img src="./img/2.png">
+				<img src="./img/3.png">
+			</p>
+			<p>
+				<img src="./img/4.png">
+				<img src="./img/5.png">
+				<img src="./img/6.png">
+			</p>
+			<p>
+				<input type="button" value="다시하기">
+			</p>
+		</div>
+		<div id="msgimg">
+			<img src="./img/q.png" id="img1">
+			<img src="./img/vs.png">
+			<img src="./img/q.png" id="img2">
+		</div>
+		<div id="msg">
+
+		</div>
+	</form>
+</body>
+
+</html>
