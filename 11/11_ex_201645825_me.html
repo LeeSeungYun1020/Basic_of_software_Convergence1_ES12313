@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<!-- 201645825 이승윤 20.07.23 // 11장 jQuery와 JavaScript 배열 응용 문제 -->
+<html>
+
+<head>
+	<title>카드만들기</title>
+	<meta charset="UTF-8">
+	<style>
+		.box1 {
+			border-radius: 10px;
+			border: 2px solid #73AD21;
+			background-color: #73AD21;
+			padding: 10px;
+			margin: 10px;
+			width: 400px;
+			height: 20px;
+			color: white;
+			text-align: center;
+		}
+
+		.box2 {
+			padding: 10px;
+			margin: 10px;
+			width: 400px;
+			text-align: center;
+		}
+
+		.box3 {
+			width: 400px;
+			margin: 10px;
+			padding: 25px;
+			font-size: 14px;
+			color: red;
+			text-align: center;
+		}
+
+		#msgimg {
+			width: 400px;
+			margin: 10px;
+			padding: 10px;
+			border: 1px solid #73AD21;
+			text-align: center;
+		}
+
+		.card {
+			width: 60px;
+			height: 60px;
+			border: 2px solid #73AD21;
+			border-radius: 5px;
+			margin: 5px;
+			padding-top: 6px;
+			font-size: 25px;
+			text-align: center;
+			float: left;
+		}
+
+		.cardClear {
+			clear: both;
+		}
+
+		#msg {
+			border-radius: 5px;
+			border: 2px solid #73AD21;
+			padding: 10px;
+			margin: 10px;
+			width: 400px;
+			height: 50px;
+			font-size: 30px;
+			text-align: center;
+			float: left;
+		}
+
+		p {
+			color: red;
+		}
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		let cardArray = [];
+		let selectedCardArray = [];
+		$(document).ready(() => {
+			$("#bt1").click(() => {
+				const contents = $("#txt1").val();
+				if (contents == ""){ // 카드 내용을 입력하지 않은 경우
+					alert("카드 내용을 입력하십시오.");
+					$("#txt1").focus();
+					return;
+				} else { // 카드 내용을 입력한 경우
+					if(cardArray.length > 0){
+						clearAll();
+						alert("카드가 이미 생성되어있습니다.\n생성된 카드는 지우고 다시 생성합니다.");
+					}
+					let numArray = contents.split(",");
+					if (numArray.length == 1){ // ,로 구분되지 않은 경우
+						const num = parseInt(contents); // 생성 개수 확인
+						if (isNaN(num)){ // 생성할 개수가 숫자가 아닌 경우
+							alert("카드 개수를 입력하거나 카드 내용을 반점 단위로 구분해서 입력하십시오.");
+							$("#txt1").focus();
+							return;
+						} else if (num < 3){ // 카드 개수 조건 미충족
+							alert("카드 개수는 3이상으로 입력하십시오.");
+							$("#txt1").focus();
+							return;
+						} else { // 조건 충족 입력한 개수만큼 카드 생성
+							for(let i = 0; i < num; i++){
+								cardArray.push(Math.floor(Math.random() * 100));
+							}
+						}
+					} else if (numArray.length < 3){ // 구분한 목록 기준으로 카드 개수 조건 미충족
+						alert("카드 개수는 3이상으로 입력하십시오.");
+						$("#txt1").focus();
+						return;
+					} else { // 구분한 목록 기준으로 카드 생성
+						for (const item of numArray) {
+							let n = parseInt(item);
+							if (isNaN(n)){
+								alert("숫자 카드만 지원합니다.");
+								$("#txt1").focus();
+								return;
+							} else {
+								cardArray.push(n);
+							}
+						}
+					}
+				}
+				console.log(cardArray);
+				revalidateCard();
+			})
+			$("#bt2").click(() => {
+				let cardValueArray = [];
+				for (let i = 0; i < selectedCardArray.length; i++) {
+					cardValueArray.push(cardArray[selectedCardArray[i]])
+				}
+				cardArray.sort(function(a, b){return a-b;});
+				revalidateCard();
+				selectedCardArray = []
+				cardValueArray.forEach(value => {
+					selectedCardArray.push(cardArray.indexOf(value))
+					$("#card" + cardArray.indexOf(value)).attr("style", "background-color: yellow");
+					console.log(cardArray.indexOf(value));
+				})
+				console.log(selectedCardArray);
+			})
+			$("#bt3").click(() => {
+				clearAll();
+			})
+			$(".box3").on("click", ".card", function(event) {
+				const index = parseInt($(this).attr("id").replace("card", ""));
+				if(selectedCardArray.indexOf(index) >= 0){
+					alert("이미 선택된 카드입니다.");
+				} else if (selectedCardArray.length >= 3){
+					alert("3개의 카드를 모두 선택하였습니다.");
+				} else {
+					$(this).attr("style", "background-color: yellow")
+					selectedCardArray.push(index);
+					let msg = $("#msg").text();
+					msg += parseInt(cardArray[index]);
+					if(selectedCardArray.length == 3){
+						let total = 0;
+						for(let i = 0; i < 3; i++){
+							let n = parseInt(cardArray[selectedCardArray[i]])
+							total += n;
+						}
+						msg += " = " + total;
+					}
+					else
+						msg += " + ";
+					$("#msg").text(msg);
+				}
+			})
+		})
+
+		function revalidateCard() {
+			let cardHtml = "";
+			for (let i = 0; i < cardArray.length; i++){
+				cardHtml += `<div class="card" id="card${i}">${cardArray[i]}</div>`
+			}
+			$(".box3").html(cardHtml);
+		}
+
+		function clearAll() {
+			cardArray = [];
+			selectedCardArray = [];
+			$(".box3").text("");
+			$("#msg").text("");
+		}
+	</script>
+</head>
+
+<body>
+	<form name="myform">
+		<div class="box1">
+			카드만들기
+		</div>
+		<div class="box2">
+			카드내용 <input type="text" name="txt1" id="txt1">
+			<p>
+				(,로 구분된 카드목록이나 카드개수를 입력하세요.)
+			</p>
+			<input type="button" value="카드보기" id="bt1">
+			<input type="button" value="정렬하기" id="bt2">
+			<input type="reset" value="지우기" id="bt3">
+		</div>
+		<div id="msg">
+		</div>
+		
+		<div class='cardClear'></div>
+		<div class="box3"></div>
+	</form>
+</body>
+
+</html>
