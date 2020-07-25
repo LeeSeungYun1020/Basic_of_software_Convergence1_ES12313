@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!-- 검색엔진으로 링크 복습 -->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>검색 엔진</title>
+        <style>
+            header{
+                width: 500px;
+                height: 50px;
+                border: solid 4px teal;
+                border-radius: 4px;
+                background-color: teal;
+                color: white;
+                box-sizing: border-box;
+                box-shadow: 4px 4px 2px black;
+                text-align: center;
+                font-size: xx-large;
+                margin: 10px;
+            }
+            #msg{
+                width: 500px;
+                height: 350px;
+                margin: 10px;
+                box-sizing: border-box;
+                border: solid 2px teal;
+                text-align: center;
+            }
+            #button{
+                width: 500px;
+                text-align: center;
+            }
+            img{
+                height: 200px;
+                max-width: 490px;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(() => {
+                $("#searchDropdown").change(() => {
+                    const site = $("#searchDropdown").val()
+                    if(site != ""){
+                        $("#searchImg").attr("src", `./img/${site}.png`)
+                        $("#searchLink").text(`https://www.${site}.com`)
+                        $("#searchAddress").attr("href", `https://www.${site}.com`)
+                    }
+                })
+            })
+        </script>
+    </head>
+    <body>
+        <header>검색 엔진</header>
+        <section id="searchBox">
+            <div id="msg">
+                <a id="searchAddress">
+                    <img id="searchImg">
+                    <p id="searchLink"></p>
+                </a>
+            </div>
+            <div id="button">
+                <select id="searchDropdown">
+                    <option value="">검색 엔진</option>
+                    <option value="google">Google</option>
+                    <option value="naver">Naver</option>
+                    <option value="msn">MSN</option>
+                </select>
+            </div>
+        </section>
+    </body>
+</html>

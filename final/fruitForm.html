@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<!-- 좋아하는 과일 선택 폼 복습 -->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>과일 선택</title>
+    </head>
+    <style>
+        header{
+            width: 500px;
+            height: 60px;
+            text-align: center;
+            font-size: xx-large;
+            color: white;
+            border-radius: 10px;
+            border: solid 2px teal;
+            background-color: teal;
+            box-shadow: 2px 2px 4px black;
+            padding-top: 10px;
+        }
+        section{
+            width: 500px;
+            box-sizing: border-box;
+            margin: 10px;
+            padding: 10px;
+        }
+        p{
+            background-color: lightcyan;
+            height: 2em;
+            padding-top: 0.5em;
+            padding-left: 5px;
+        }
+        img{
+            width: 200px;
+        }
+        input[type="text"], input[type="password"]{
+            width: 100%;
+            height: 2em;
+            box-sizing: border-box;
+        }
+        input[type="button"], input[type="reset"]{
+            background-color: teal;
+            color: white;
+            width: 200px;
+            height: 40px;
+            margin: 10px 10px;
+            margin-top: 30px;
+        }
+        #buttonBox{
+            text-align: center;
+        }
+        #msg{
+            border: 2px solid teal;
+            height: 150px;
+            padding-top: 30px;
+            font-size: xx-large;
+            text-align: center;
+        }
+        #results{
+            display: none;
+        }
+    </style>
+    <script>
+        function showResult() {
+            if (fruitForm.textName.value == ""){
+                alert("이름을 입력하세요.")
+                fruitForm.textName.focus()
+                return
+            }
+            if (fruitForm.textPass.value == ""){
+                alert("비밀번호를 입력하세요.")
+                fruitForm.textPass.focus()
+                return
+            }
+            if (fruitForm.fruitRadio.value == ""){
+                alert("과일을 선택하세요.")
+                return
+            }
+            let message = "선택한 과일: " + fruitForm.fruitRadio.value + "<br>"
+            message += `이름: ${fruitForm.textName.value}, 비밀번호: ${fruitForm.textPass.value}`
+            document.getElementById("msg").innerHTML = message
+            document.getElementById("contents").style.display = "none"
+            document.getElementById("results").style.display = "block"
+        }
+
+        function redo() {
+            fruitForm.reset()
+            document.getElementById("msg").innerText = ""
+            document.getElementById("contents").style.display = "block"
+            document.getElementById("results").style.display = "none"
+        }
+    </script>
+    <body>
+        <header>좋아하는 과일을 선택해 보세요.</header>
+        <section id="contents">
+            <form name="fruitForm">
+                <div id="nameBox">
+                    <p>이름</p>
+                    <input type="text" name="textName" id="textName" placeholder="이름 입력">
+                </div>
+                <div id="passwordBox">
+                    <p>비밀번호</p>
+                    <input type="password" name="textPass" id="textPass" placeholder="비밀번호 입력">
+                </div>
+                <div id="fruitBox">
+                    <p>과일을 선택하세요.</p>
+                    <span class="fruitSpan">
+                        <input type="radio" name="fruitRadio" class="fruitRadio" id="strawberry" value="딸기">
+                        <label for="strawberry"><img src="./img/strawberry.png"></label>
+                    </span>
+                    <span class="fruitSpan">
+                        <input type="radio" name="fruitRadio" class="fruitRadio" id="banana" value="바나나">
+                        <label for="banana"><img src="./img/banana.png"></label>
+                    </span>
+                    <span class="fruitSpan">
+                        <input type="radio" name="fruitRadio" class="fruitRadio" id="apple" value="사과">
+                        <label for="apple"><img src="./img/apple.png"></label>
+                    </span>
+                    <span class="fruitSpan">
+                        <input type="radio" name="fruitRadio" class="fruitRadio" id="watermelon" value="수박">
+                        <label for="watermelon"><img src="./img/watermelon.png"></label>
+                    </span>
+                </div>
+                <div id="buttonBox">
+                    <input type="button" id="okButton" value="결과보기" onclick="showResult()">
+                    <input type="reset" id="resetButton" value="취소">
+                </div>
+            </form>
+        </section>
+        <section id="results">
+            <div id="msg"></div>
+            <form name="redoForm">
+                <input type="button" id="redoButton" value="다시 선택" onclick="redo()">
+            </form>
+        </section>
+    </body>
+</html>

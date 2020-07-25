@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<!-- 구구단 연습 -->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>구구단</title>
+        <style>
+            header{
+                width: 500px;
+                margin: 10px;
+                height: 50px;
+                box-sizing: border-box;
+                border: solid 3px teal;
+                border-radius: 5px;
+                background-color: teal;
+                color: white;
+                box-shadow: 3px 3px 2px black;
+                text-align: center;
+                font-size: xx-large;
+            }
+            #buttonBox{
+                width: 500px;
+                padding: 20px;
+                text-align: center;
+            }
+            input, select{
+                min-height: 30px;
+            }
+            img{
+                width: 70px;
+            }
+            #msgBox{
+                width: 500px;
+                height: 250px;
+                margin: 10px;
+                border: solid 2px teal;
+                text-align: center;
+            }
+            #msgBox>div{
+                margin-top: 20px;
+            }
+            #randomMsg{
+                display: none;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(() => {
+                $("#danButton").click(() => {
+                    if($("#danSelect").val() == ""){
+                        alert("단을 선택하십시오.")
+                        return
+                    }
+                    $("#randomMsg").hide()
+                    $("#danMsg").show()
+                    const dan = $("#danSelect").val()
+                    let text = dan + "단<br>"
+                    for(let i = 1; i <= 9; i++){
+                        text += dan + " X " + i + " = " + (dan * i) + "<br>"
+                    }
+                    $("#danMsg").html(text)
+                })
+                $("#randomButton").click(() => {
+                    $("#randomMsg").show()
+                    $("#danMsg").hide()
+                    $("#danSelect").val("")
+                    const num1 = Math.floor(Math.random() * 9) + 1
+                    const num2 = Math.floor(Math.random() * 9) + 1
+                    const ans = num1 * num2
+                    $("#num1").attr("src", `./img/${num1}.png`)
+                    $("#num2").attr("src", `./img/${num2}.png`)
+
+                    $("#ans1").attr("src", `./img/${Math.floor(ans/10)}.png`)
+                    $("#ans2").attr("src", `./img/${ans % 10}.png`)
+                    
+                })
+                $("#clearButton").click(() => {
+                    $("#randomMsg").hide()
+                    $("#danMsg").hide()
+                    $("#danSelect").val("")
+                })
+            })
+        </script>
+    </head>
+    <body>
+        <header>구구단 학습하기</header>
+        <section id="buttonBox">
+            <form name="multiButton">
+                <select id="danSelect">
+                    <option value="">단 선택</option>
+                    <option value="2">2단</option>
+                    <option value="3">3단</option>
+                    <option value="4">4단</option>
+                    <option value="5">5단</option>
+                    <option value="6">6단</option>
+                    <option value="7">7단</option>
+                    <option value="8">8단</option>
+                    <option value="9">9단</option>
+                </select>
+                <input type="button" id="danButton" value="단 보기">
+                <input type="button" id="randomButton" value="랜덤 보기">
+                <input type="button" id="clearButton" value="지우기">
+            </form>
+        </section>
+        <section id="msgBox">
+            <div id="randomMsg">
+                <img id="num1">
+                <img src="./img/x.png">
+                <img id="num2">
+                <img src="./img/equal.png">
+                <img id="ans1">
+                <img id="ans2">
+            </div>
+            <div id="danMsg"></div>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<!-- 사용자 개인 정보 입력 폼 복습 -->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>개인 정보 입력</title>
+        <style>
+            header{
+                width: 320px;
+                height: 40px;
+                font-size: 25px;
+                margin-top: 5px;
+                padding-top: 5px;
+                text-align: center;
+                border: solid 4px teal;
+                border-radius: 3px;
+                background-color: teal;
+                color: white;
+                box-shadow: 2px 2px 5px black;
+            }
+            section{
+                width: 320px;
+                margin: 0px 10px;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+            .title{
+                font-size: 18px;
+            }
+            .inputBox{
+                border: 2px solid gray;
+                padding: 10px 20px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            input[type=text], input[type=number]{
+                height: 30px;
+            }
+            input[type=checkbox], input[type=radio]{
+                width: 30px;
+            }
+            input[type=text]{
+                width: 100%;
+            }
+            input[type=number]{
+                width: 30%;
+            }
+            #monthText{
+                height: 30px;
+                margin: 0px 5px;
+            }
+            #msg{
+                width: 100%;
+                height: 100px;
+                border: 2px solid gray;
+                box-sizing: border-box;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            function init() {
+                const date = new Date()
+                $("#yearText").val(date.getFullYear())
+                $("#monthText").val(date.getMonth() + 1)
+                $("#dayText").val(date.getDate())
+            }
+
+            $(document).ready(() => {
+                init()
+                $("#okButton").click(() => {
+                    let msg = ""
+                    msg += "이름: " + $("#nameText").val() + "<br>"
+                    msg += "이메일: " + $("#mailText").val() + "<br>"
+                    msg += `생년월일: ${$("#yearText").val()}년 ${$("#monthText").val()}월 ${$("#dayText").val()}일` + "<br>"
+                    msg += "성별: " + myForm.genderRadio.value + "<br>"
+                    msg += "관심분야: "
+                    $(".checkInterest").each((index, element) => {
+                        if(element.checked)
+                            msg += element.value + "   "
+                    })
+                    msg += "<br>" + "기타: " + $("#msg").val() + "<br>"
+                    document.write(msg)
+                })    
+            })
+            
+        </script>
+    </head>
+    <body>
+        <header>개인 정보 입력</header>
+        <form name="myForm">
+            <section>
+                <p>
+                    <label for="nameText" class="title">이름</label><br>
+                    <input type="text" id="nameText" placeholder="이름 입력">
+                    
+                </p>
+                <p>
+                    <label for="mailText" class="title">이메일</label><br>
+                    <input type="text" id="mailText" placeholder="메일 입력">
+                </p>                
+                <p>
+                    <p class="title">생년월일</p>
+                    <input type="number" id="yearText" placeholder="년">
+                    <select id="monthText">
+                        <option value="">월 선택</option>
+                        <option value="1">1월</option>
+                        <option value="2">2월</option>
+                        <option value="3">3월</option>
+                        <option value="4">4월</option>
+                        <option value="5">5월</option>
+                        <option value="6">6월</option>
+                        <option value="7">7월</option>
+                        <option value="8">8월</option>
+                        <option value="9">9월</option>
+                        <option value="10">10월</option>
+                        <option value="11">11월</option>
+                        <option value="12">12월</option>
+                    </select>
+                    <input type="number" id="dayText" placeholder="일">
+                </p>
+                <p>
+                    <p class="title">성별</p>
+                    <div id="genderBox" class="inputBox">
+                        <label for="genderMale">남</label>
+                        <input type="radio" name="genderRadio" id="genderMale" class="genderRadio" value="남" checked>
+                        <label for="genderFemale">여</label>
+                        <input type="radio" name="genderRadio" id="genderFemale" class="genderRadio" value="여">
+                    </div>
+                </p> 
+                <p>
+                    <p class="title">관심분야</p>
+                    <div id="interestBox" class="inputBox">
+                        <label for="checkC">C</label>
+                        <input type="checkbox" name="checkInterest" id="checkC" class="checkInterest" value="C">
+                        <label for="checkPython">Python</label>
+                        <input type="checkbox" name="checkInterest" id="checkPython" class="checkInterest" value="Python">
+                        <label for="checkJava">Java</label>
+                        <input type="checkbox" name="checkInterest" id="checkJava" class="checkInterest" value="Java">
+                    </div>
+                    
+                </p>
+                <p>
+                    <p class="title">기타</p>
+                    <textarea id="msg"></textarea>
+                </p> 
+                <p>
+                    <input type="button" id="okButton" value="확인">
+                    <input type="reset" id="cancelButton" value="취소">
+                </p> 
+            </section>
+        </form>
+    </body>
+</html>
