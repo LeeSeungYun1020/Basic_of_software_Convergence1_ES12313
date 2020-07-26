@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!-- 랜덤 짝수 홀수 카드 생성 및 클릭 이벤트 복습 -->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>랜덤 카드 클릭 이벤트</title>
+        <style>
+            header{
+                width: 500px;
+                height: 50px;
+                box-sizing: border-box;
+                margin: 10px;
+                color: white;
+                background-color: teal;
+                border: solid 4px teal;
+                border-radius: 5px;
+                box-shadow: 2px 2px 3px black;
+                font-size: xx-large;
+                text-align-last: center;
+            }
+            section{
+                width: 500px;
+                text-align: center;
+                margin: 10px;
+            }
+            .card{
+                width: 60px;
+                height: 60px;
+                border: solid 1px teal;
+                text-align: center;
+                font-size: x-large;
+                float: left;
+                margin: 4px;
+                padding-top: 10px;
+                box-sizing: border-box;
+                color: black;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(() => {
+                $("#createButton").click(() => {
+                    clear()
+                    const cards = $(".card")
+                    for (let i = 0; i < cards.length; i++) {
+                        cards[i].innerText = Math.floor(Math.random() * 99) + 1
+                    }
+                })
+
+                $(".card").on({
+                    mouseenter: function() {
+                        if($(this).css("background-color") == 'rgba(0, 0, 0, 0)')
+                            $(this).css("background-color", "lightgrey")
+                    },
+                    mouseleave: function() {
+                        if($(this).css("background-color") == 'rgb(211, 211, 211)')
+                            $(this).css("background-color", "rgba(0, 0, 0, 0)")
+                    },
+                    click: function(){
+                        console.log($(this).css("color"))
+                        if($(this).css("color") == "rgb(255, 255, 255)"){
+                            $(this).css({
+                                "background-color": "rgba(0, 0, 0, 0)",
+                                "color": "black"
+                            })
+                            return
+                        }
+
+
+                        const num = parseInt($(this).text())
+                        if(isNaN(num))
+                            return
+                        if(num % 2 == 0){
+                            $(this).css({
+                                "background-color": "red",
+                                "color": "white"
+                            })
+                        } else {
+                            $(this).css({
+                                "background-color": "blue",
+                                "color": "white"
+                            })
+                        }
+                    }
+                })
+
+                $("#clearButton").click(() => {
+                    clear()
+                })
+
+                function clear() {
+                     $(".card").each((i, element) => {
+                        $(element).css({
+                            "background-color": "rgba(0, 0, 0, 0)",
+                            "color": "black"
+                        })
+                        $(element).text("")
+                    })
+                }
+            })
+        </script>
+    </head>
+    <body>
+        <header>
+            랜덤 카드 클릭 이벤트
+        </header>
+        <section id="cardBox">
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div style="clear: both;"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div style="clear: both;"></div>
+        </section>
+        <section id="buttonBox">
+            <form name="cardForm">
+                <input type="button" id="createButton" value="버튼 생성">
+                <input type="button" id="clearButton" value="번호 지우기">
+            </form>
+        </section>
+    </body>
+</html>

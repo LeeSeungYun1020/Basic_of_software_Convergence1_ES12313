@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<!-- 계산기 복습 -->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>계산기</title>
+        <style>
+            header{
+                width: 500px;
+                height: 50px;
+                background-color: teal;
+                border: solid 3px teal;
+                box-shadow: 2px 2px 4px black;
+                font-size: 20px;
+                padding: 10px;
+                margin: 10px;
+                text-align: center;
+                color: white;
+                box-sizing: border-box;
+            }
+            #selectType>form{
+                border: solid 2px teal;
+                width: 500px;
+                height: 40px;
+                padding: 7px;
+                box-sizing: border-box;
+            }
+            body>div{
+                margin: 20px 10px;
+            }
+            #simpleContents, #normalContents, #simpleResult, #normalResult{
+                border: solid 2px teal;
+                width: 500px;
+                padding: 10px;
+                margin: 10px;
+                box-sizing: border-box;
+            }
+            #simpleContents{
+                height: 140px;
+            }
+            #normal{
+                display: none;
+            }
+            #normalContents{
+                text-align: center;
+            }
+            #simple input[type="number"]{
+                width: 120px;
+                height: 40px;
+                box-sizing: border-box;
+            }
+            #simple input[type="button"], input[type="reset"], #simple select{
+                width: 60px;
+                height: 40px;
+                box-sizing: border-box;
+            }
+            #normal input{
+                width: 40px;
+                height: 40px;
+                margin: 1px;
+            }
+            #normalResult {
+                width: 470px;
+                height: 60px;
+                margin-left: 5px;
+                text-align: right;
+                font-size: 40px;
+                
+            }
+            #simpleResult {
+                height: 100px;
+                margin-top: 10px;
+                text-align: center;
+                font-size: 50px;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(() => {
+                $("#typeSimple").click(() => {
+                    $("#simple").show()
+                    $("#normal").hide()
+                })
+                $("#typeNormal").click(() => {
+                    $("#simple").hide()
+                    $("#normal").show()
+                })
+                $("#simpleEqual").click(() => {
+                    const num1 = $("#simpleNum1").val()
+                    const num2 = $("#simpleNum2").val()
+                    const operator = $("#simpleOper").val()
+                    if (num1 == ""){
+                        alert("숫자1 입력하세요.")
+                        $("#simpleNum1").focus()
+                        return
+                    }
+                    if (num2 == ""){
+                        alert("숫자2 입력하세요.")
+                        $("#simpleNum2").focus()
+                        return
+                    }
+                    const answer = eval(`${num1} ${operator} ${num2}`)
+                    let text = answer;
+                    if ($("#simpleEval").prop("checked") == true){
+                        text = `${num1} ${operator} ${num2} = ${answer}`
+                    }
+                    $("#simpleResult").text(text)
+                })
+                $("#simpleReset").click(() => {
+                    $("#simpleResult").text("")
+                })
+                $(".calcButton").click(function(){
+                    $("#normalResult").text($("#normalResult").text() + $(this).val())
+                })
+                $("#clearButton").click(() => {
+                    $("#normalResult").text("")
+                })
+                $("#clearLastButton").click(() => {
+                    let text = $("#normalResult").text()
+                    $("#normalResult").text(text.substr(0, text.length - 1))
+                })
+                $("#normalEvalButton").click(() => {
+                    let text = $("#normalResult").text()
+                    $("#normalResult").text(eval(text))
+                })
+            })
+        </script>
+    </head>
+    <body>
+        <div id="selectType">
+            <p>계산기 선택</p>
+            <form name="typeForm">
+                <input type="radio" name="typeRadio" id="typeSimple" value="simple" class="type" checked>
+                <label for="typeSimple">간단한 계산기</label>
+                <input type="radio" name="typeRadio" id="typeNormal" value="normal" class="type">
+                <label for="typeNormal">자바스크립트 계산기</label>
+            </form>
+        </div>
+        <div id="simple">
+            <header id="simpleTitle">간단한 계산기</header>
+            <section id="simpleContents">
+                <form name="simpleForm">
+                    <input type="number" id="simpleNum1" placeholder="숫자1">
+                    <select id="simpleOper">
+                        <option value="+" selected>+</option>
+                        <option value="-">-</option>
+                        <option value="*">*</option>
+                        <option value="/">/</option>
+                    </select>
+                    <input type="number" id="simpleNum2" placeholder="숫자2">
+                    <input type="button" id="simpleEqual" value="=">
+                    <input type="reset" id="simpleReset" value="취소">
+                    <p>
+                        <input type="checkbox" id="simpleEval">
+                        <label for="simpleEval">수식 포함</label>
+                    </p>
+                </form>
+            </section>
+            <section id="simpleResult"></section>
+        </div>
+        <div id="normal">
+            <header>자바스크립트 계산기</header>
+            <section id="normalContents">
+                <div id="normalResult"></div>
+                <form name="normalForm">
+                    <div style="float: left;"></div>
+                    <input type="button" id="clearLastButton" value="CE">
+                    <input type="button" id="clearButton" value="C">
+                    <input type="button" class="calcButton" value=".">
+                    <input type="button" class="calcButton" value="/">
+                    <div style="clear: both;"></div>
+                    <input type="button" class="calcButton" value="7">
+                    <input type="button" class="calcButton" value="8">
+                    <input type="button" class="calcButton" value="9">
+                    <input type="button" class="calcButton" value="*">
+                    <div style="clear: both;"></div>
+                    <input type="button" class="calcButton" value="4">
+                    <input type="button" class="calcButton" value="5">
+                    <input type="button" class="calcButton" value="6">
+                    <input type="button" class="calcButton" value="-">
+                    <div style="clear: both;"></div>
+                    <input type="button" class="calcButton" value="1">
+                    <input type="button" class="calcButton" value="2">
+                    <input type="button" class="calcButton" value="3">
+                    <input type="button" class="calcButton" value="+">
+                    <div style="clear: both;"></div>
+                    <input type="button" class="calcButton" value="(">
+                    <input type="button" class="calcButton" value="0">
+                    <input type="button" class="calcButton" value=")">
+                    <input type="button" id="normalEvalButton" value="=">
+                    <div style="clear: both;"></div>
+                </form>
+            </section>
+        </div>
+    </body>
+</html>

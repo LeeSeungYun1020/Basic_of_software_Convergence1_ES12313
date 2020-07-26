@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!-- 홀짝 카드 복습 -->
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>홀짝 카드</title>
+    <style>
+        header {
+            width: 500px;
+            height: 50px;
+            background-color: teal;
+            text-align: center;
+            color: white;
+            border-radius: 5px;
+            border: solid 4px teal;
+            box-sizing: border-box;
+            font-size: xx-large;
+            margin: 10px;
+            box-shadow: 4px 4px 2px black;
+        }
+
+        #buttonBox, #cardBox {
+            width: 500px;
+            text-align: center;
+        }
+
+        input[type="number"] {
+            width: 80px;
+        }
+
+        .card1, .card2 {
+            width: 80px;
+            height: 100px;
+            float: left;
+            color: red;
+            font-size: x-large;
+            text-align: center;
+            border: solid 2px teal;
+            border-radius: 3px;
+            margin: 3px;
+        }
+
+        .card2 {
+            background-color: yellow;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(() => {
+            $("#showButton").click(() => {
+                if ($("#start").val() == "") {
+                    alert("시작 숫자 입력")
+                    $("#start").focus()
+                    return
+                }
+                if ($("#end").val() == "") {
+                    alert("종료 숫자 입력")
+                    $("#end").focus()
+                    return
+                }
+                let start = parseInt($("#start").val())
+                let end = parseInt($("#end").val())
+                if (end < start) {
+                    let tem = start
+                    start = end
+                    end = tem
+                }
+                console.log(start)
+                let html = ""
+                let count = 0
+                for (let i = start; i <= end; i++) {
+                    count++
+                    if (i % 2 == 0)
+                        html += `<div class="card2">${i}</div>`
+                    else
+                        html += `<div class="card1">${i}</div>`
+
+                    if (count % 5 == 0) {
+                        html += `<div style="clear: both;"></div>`
+                    }
+                }
+                $("#cardBox").html(html)
+            })
+            $("#clearButton").click(() => {
+                cardForm.reset()
+                $("#cardBox").html("")
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <header>카드 만들기</header>
+    <section id="buttonBox">
+        <form name="cardForm">
+            <label for="start">시작</label>
+            <input type="number" id="start">
+            <label for="end">종료</label>
+            <input type="number" id="end">
+            <label for="start">시작</label>
+            <input type="button" id="showButton" value="카드보기">
+            <input type="button" id="clearButton" value="지우기">
+        </form>
+    </section>
+    <section id="cardBox">
+    </section>
+</body>
+
+</html>
